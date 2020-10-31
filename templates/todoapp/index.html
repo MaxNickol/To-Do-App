@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&family=Trispace:wght@200;700&display=swap"
+        rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+    <header>
+        <nav class="nav_bar">
+            <a href="{% url 'home_page' %}"><span class="title">TO_DO</span></a>
+            <ul class='container1'>
+                <i class="material-icons">menu</i>
+                <div class="items-wrap">
+                    <li><a href="{% url 'home_page' %}">Home page</a></li>
+                    <li><a href="{% url 'create_todo' %}">List of Tasks</a></li>
+                    <li><a href='#'>Contacts</a></li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <div class="container-wrapper">
+        <div class="container">
+
+            <form action="{% url 'create_todo' %}" class='form-wrap' method='POST'> {% csrf_token %}
+                <input type="text" name="create_card" placeholder="Input the task here" class=" input">
+                <button class="circle_btn" type="submit" name="action">
+                    <i class="medium material-icons circle hoverable"
+                        style="background-color:#FC8585; color:#FFFFFF; margin-left: 15px;" id='add_button'>add</i>
+                </button>
+            </form>
+
+        </div>
+
+        <div class="row">
+
+        {% block cards %}
+
+        {% endblock cards %}
+
+        </div>
+    </div>
+    <script src="{% static 'scripts/main.js' %}" defer></script>
+</body>
+
+</html>

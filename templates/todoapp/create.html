@@ -1,0 +1,32 @@
+{% extends 'todoapp/index.html' %}
+
+{% block cards %}
+
+    {% for todo in todos %}
+    
+            <div class="cell-wrap"><p class="grid-class">{{todo.description}}</p></div>
+            <div class="cell-wrap"><p class="grid-class">{{todo.time_creation}}</p></div>
+            <div class="cell-wrap"><i class="small material-icons animation" id="clear_btn">clear</i></div>
+
+            <div class="module-window">
+
+                
+                    <header class="module-head">
+                        <button class="clear">&times;</button>
+                    </header>
+                    <p class='module-text'>Do you want to delete the task?</p>
+                    <form action="{% url 'todo_delete' todo.id %}" method="POST" class="delete_form"> {%csrf_token%}
+                        <button type="submit" name='submit' value="Yes" id="frst_btn">Yes</button>
+                        <button name='submit' value='No' id="scnd_btn">No</button>
+                    </form>
+                    
+                
+
+            </div>
+    {% endfor %}
+
+    
+
+ 
+
+{% endblock cards %}
