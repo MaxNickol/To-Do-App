@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,18 +23,19 @@
                 <i class="material-icons">menu</i>
                 <div class="items-wrap">
                     <li><a href="{% url 'home_page' %}">Home page</a></li>
-                    <li><a href="{% url 'create_todo' %}">List of Tasks</a></li>
-                    <li><a href='#'>Contacts</a></li>
+                    <li><a href='{% url "contacts" %}'>Contacts</a></li>
                 </div>
             </ul>
         </nav>
     </header>
+    
     <div class="container-wrapper">
+        {% block content %}
         <div class="container">
 
-            <form action="{% url 'create_todo' %}" class='form-wrap' method='POST'> {% csrf_token %}
+            <form action="{% url 'create_todo' %}" class='form-wrap' method='POST'>
                 <input type="text" name="create_card" placeholder="Input the task here" class=" input">
-                <button class="circle_btn" type="submit" name="action">
+                <button class="circle_btn" type="submit">
                     <i class="medium material-icons circle hoverable"
                         style="background-color:#FC8585; color:#FFFFFF; margin-left: 15px;" id='add_button'>add</i>
                 </button>
@@ -43,12 +45,28 @@
 
         <div class="row">
 
-        {% block cards %}
+            {% for todo in todos %}
 
-        {% endblock cards %}
+            <div class="cell-wrap">
+                <p class="grid-class">{{todo.description}}</p>
+            </div>
+            <div class="cell-wrap">
+                <p class="grid-class-time">{{todo.time_creation}}</p>
+            </div>
+            <div class="cell-wrap">
+                <p>{{todo.id}}</p>
+                <form action="{% url 'todo_delete' todo.id %}" method="POST">
+                    <button type="submit" class='hidden'><div class="cell-wrap"><i class="small material-icons animation" id="clear_btn">clear</i></div>
+                    </button>
+                    </form>
+            </div>
+
+            {% endfor %}
 
         </div>
+        
     </div>
+    {% endblock content %}
     <script src="{% static 'scripts/main.js' %}" defer></script>
 </body>
 

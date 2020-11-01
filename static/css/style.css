@@ -131,7 +131,7 @@ ul {
 
 .row {
     display: grid;
-    grid-template-columns: 1fr 200px 200px;
+    grid-template-columns: 1fr 250px 125px;
     grid-template-rows: auto;
     grid-gap: 10px;
     max-height: fit-content;
@@ -167,79 +167,22 @@ p {
     text-overflow: clip;
 }
 
+.grid-class-time {
+    width: 250px;
+    font-size: 18px;
+    font-family: 'Trispace', sans-serif;
+}
+
 .grid-class {
     font-family: 'Trispace', sans-serif;
     font-size: 18px;
-    text-align: center;
     overflow-x: hidden;
 }
 
-.module-window {
-    height: 50%;
-    width: 50%;
-    border: 7px solid #40B3FF;
-    display: none;
-    border-radius: 10px;
-    position: absolute;
-    background-color: #fff;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    grid-template-rows: 25% 50% 25%;
-
-}
-
-.modal-open {
-    display:grid;
-    animation: menu 0.5s ease-in-out forwards;
-}
-
-.module-head {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-}
-
-
-.module-text {
-    justify-self: center;
-    width: 100%;
-    text-align: center;
-    align-self: center;
-    font-family: 'Trispace', sans-serif;
-    font-size: 30px;
-}
-
-.delete_form {
-    width: 100%;
-}
-
-#frst_btn {
+.hidden {
     background-color: transparent;
     border: none;
-    font-family: 'Trispace', sans-serif;
-    font-size: 30px;
-    float: left;
-    margin-left: 5%;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
 }
-
-#scnd_btn {
-    background-color: transparent;
-    border: none;
-    font-family: 'Trispace', sans-serif;
-    font-size: 30px;
-    float: right;
-    margin-right: 5%;
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
-}
-
-
 
 .clear {
     font-size: 52px;
@@ -255,6 +198,27 @@ p {
 .clear:hover {
     transform: scale(1.5);
     cursor: pointer;
+}
+
+.contacts {
+    font-family: 'Trispace', sans-serif;
+    width: 100%;
+    text-align: start;
+    transition: 0.3s ease-in-out;
+    margin: 10px;
+    padding: 10px;
+}
+
+.contacts:hover{
+    text-shadow: 5px 0px 10px #40B3FF;
+    transform: scale(1.5);
+}
+
+.wrapper {
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 /* Styling scrollbar */

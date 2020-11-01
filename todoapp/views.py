@@ -1,48 +1,38 @@
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import To_Do
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-
-
 def home_page(request):
-    return render(request, 'todoapp/index.html', {})
+    todos = To_Do.objects.all().order_by('-id')
+    return render(request, 'todoapp/index.html', {
+        'todos': todos
+    })
 
 
+@csrf_exempt
 def create_todo(request):
 
-    whole_list = To_Do.objects.all().order_by('-time_creation')
+    print(request.POST)
 
-    context = {
-        'todos': whole_list
-    }
+    card_content = request.POST['create_card']
 
-    if request.method == 'GET':
-        return render(request, 'todoapp/create.html', context)
+    print(card_content)
 
-    if request.method == 'POST':
-        todo = request.POST.get('create_card')
+    To_Do.objects.create(description=card_content)
 
-        To_Do.objects.create(description=todo)
-
-        context = {
-            'todos': whole_list
-        }
-        return render(request, 'todoapp/create.html', context)
+    return HttpResponseRedirect('/')
 
 
 
-
+@csrf_exempt
 def todo_delete(request, todo_id):
+    To_Do.objects.get(id=todo_id).delete()
+    print(todo_id)
+    return HttpResponseRedirect('/')
 
-    if request.method == 'POST':
-        action = request.POST.get('submit')
 
-        print(action)
-
-        if action == 'Yes':
-            task = To_Do.objects.get(id=todo_id)
-            task.delete()
-            return redirect('../create')
-        else:
-            return redirect('../create')
+def contact_view(request):
+    return render(request, 'todoapp/contacts.html', {})
